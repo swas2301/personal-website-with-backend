@@ -1,0 +1,26 @@
+{
+  "name": "personal-website-with-backend",
+  "version": "1.0.0",
+  "description": "My personal website with back-end functionality. It is created with Node.js, Express.js, Ejs and MongoDB database. Front-end is created with HTML, CSS and Bootstrap 4. The Testimonial section of the website can be updated by adding comments component. It also has log in and register routes. Here is the link: https://swastika-kundu-personalwebsite.herokuapp.com/",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swas2301/personal-website-with-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swas2301/personal-website-with-backend/issues"
+  },
+  "homepage": "https://github.com/swas2301/personal-website-with-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.7.0"
+  }
+}
