@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://admin-swastika:test123@cluster0.yqol0.mongodb.net/userDB", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://127.0.0.1:27017/test');
 
 const userSchema = {
   email: String,
@@ -92,35 +92,44 @@ app.post("/register", function(req, res){
     email: req.body.username,
     password: req.body.password
   });
-newUser.save(function(err){
-  if(err) {
-    console.log(err);
-  }
-  else {
+  newUser.save()
+  .then(() => {
+    // Success, render "compose" page
     res.render("compose");
-  }
-});
+  })
+  .catch((err) => {
+    // Error occurred, log it and handle it
+    console.log(err);
+    res.render("error"); // You can render an error page or show a message
+  });
+
 });
 
 app.post("/login", function(req, res){
   const username = req.body.username;
   const password = req.body.password;
 
-  User.findOne({email: username}, function(err, foundUser){
-    if(err) {
-      console.log(err);
-    } else {
-      if(foundUser) {
-        if(foundUser.password === password) {
-          res.render("compose");
-        } else {
-          res.render("failed");
-        }
-      } else{
-        res.render("failed");
+  User.findOne({ email: username }).exec()
+    .then((foundUser) => {
+      if (!foundUser) {
+        // If no user is found, render "failed"
+        return res.render("failed");
       }
-    }
-  });
+
+      // Compare provided password with the stored password
+      if (foundUser.password === password) {
+        // Password matches, render "compose"
+        return res.render("compose");
+      } else {
+        // Password doesn't match, render "failed"
+        return res.render("failed");
+      }
+    })
+    .catch((err) => {
+      // Handle any errors
+      console.log(err);
+      res.render("failed");
+    });
 });
 
 app.post("/compose", function(req, res){
