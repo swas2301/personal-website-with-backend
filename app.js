@@ -17,7 +17,7 @@ app.use(express.static("public"));
 
 
 // Replace with your MongoDB connection string
-const uri = 'mongodb+srv://swastika:swastika2301@cluster0.mongodb.net/myapp?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://swastika:swastika2301@cluster0.yqol0.mongodb.net/myapp?retryWrites=true&w=majority&appName=Cluster0';
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
